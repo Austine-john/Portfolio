@@ -49,19 +49,7 @@ const Navbar = () => {
                     </li>
                 </ul>
 
-                <div className="nav-icons">
-                    <a href="https://github.com/Austine-john" target="_blank" rel="noopener noreferrer" className="nav-icon">
-                        <FaCode />
-                    </a>
-                    <a href="https://www.linkedin.com/in/austine-john/" target="_blank" rel="noopener noreferrer" className="nav-icon">
-                        <FaLinkedin />
-                    </a>
-                    <a href="mailto:austineochieng101@gmail.com" className="nav-icon">
-                        <FaEnvelope />
-                    </a>
-                </div>
-
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="resume-btn">
+                <a href="/AUSTINE OCHIENG_CV.pdf" target="_blank" rel="noopener noreferrer" className="resume-btn">
                     <FaFileAlt /> Resume
                 </a>
 

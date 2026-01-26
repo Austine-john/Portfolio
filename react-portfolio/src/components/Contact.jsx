@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import './Contact.css';
@@ -11,6 +11,11 @@ const Contact = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+
+    // Initialize EmailJS with public key
+    useEffect(() => {
+        emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -29,11 +34,11 @@ const Contact = () => {
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
                 {
-                    user_name: formData.name,
-                    user_email: formData.email,
-                    message: formData.message
-                },
-                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                    title: 'Portfolio Contact Form'
+                }
             );
 
             setSubmitStatus('success');
@@ -127,10 +132,10 @@ const Contact = () => {
                         </button>
 
                         {submitStatus === 'success' && (
-                            <p className="status-message success">✅ Message sent successfully!</p>
+                            <p className="status-message success"> Message sent successfully!</p>
                         )}
                         {submitStatus === 'error' && (
-                            <p className="status-message error">❌ Failed to send message. Please try again later.</p>
+                            <p className="status-message error"> Failed to send message. Please try again later.</p>
                         )}
                     </form>
                 </div>

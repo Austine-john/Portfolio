@@ -22,7 +22,7 @@ const Footer = () => {
                         <a href="https://www.linkedin.com/in/austine-john/" target="_blank" rel="noopener noreferrer" className="footer-icon">
                             <FaLinkedin />
                         </a>
-                        <a href="https://twitter.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer" className="footer-icon">
+                        <a href="https://x.com/Austine77_" target="_blank" rel="noopener noreferrer" className="footer-icon">
                             <FaTwitter />
                         </a>
                     </div>

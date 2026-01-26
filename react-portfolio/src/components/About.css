@@ -1,13 +1,17 @@
 .about {
     background: var(--bg-primary);
     padding: 6rem 0;
+    overflow-x: hidden;
 }
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 350px 1fr;
     gap: 4rem;
     align-items: start;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .about-image-wrapper {
@@ -41,75 +45,6 @@
     line-height: 1.8;
 }
 
-.about-journey {
-    margin-top: 3rem;
-}
-
-.about-journey h3 {
-    font-size: 1.8rem;
-    color: var(--text-primary);
-    margin-bottom: 2rem;
-}
-
-.journey-item {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
-    padding: 1.5rem;
-    background: var(--bg-secondary);
-    border-radius: 0.75rem;
-    border-left: 4px solid var(--accent-primary);
-    transition: all 0.3s;
-}
-
-.journey-item:hover {
-    transform: translateX(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.journey-icon {
-    font-size: 2rem;
-    min-width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg-primary);
-    border-radius: 0.5rem;
-}
-
-.journey-content h4 {
-    font-size: 1.2rem;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-}
-
-.journey-company {
-    color: var(--accent-primary);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-}
-
-.journey-content ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.journey-content li {
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.journey-content li::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: var(--accent-primary);
-    font-weight: bold;
-}
-
 @media (max-width: 968px) {
     .about-content {
         grid-template-columns: 1fr;
@@ -123,16 +58,5 @@
 
     .about-image-wrapper {
         max-width: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .journey-item {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .journey-icon {
-        width: 100%;
     }
 }

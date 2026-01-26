@@ -6,26 +6,26 @@ const Projects = () => {
         {
             title: 'E-Commerce Platform',
             description: 'A full-featured online store built with a modern frontend and a robust backend for seamless shopping experiences.',
-            image: 'https://images.pexels.com/photos/38519/macbook-laptop-ipad-apple-38519.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            tags: ['React', 'Stripe', 'Node.js'],
-            liveLink: '#',
+            image: '/src/assets/images/ecommerce.png',
+            tags: ['React.js', 'Daraja API', 'Flask', 'sqlite'],
+            liveLink: '',
             codeLink: '#'
         },
         {
-            title: 'Data Visualization Dashboard',
-            description: 'An interactive dashboard for visualizing complex datasets with real-time updates and customizable charts.',
-            image: 'https://images.pexels.com/photos/8152735/pexels-photo-8152735.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            tags: ['Python', 'D3.js', 'Flask'],
-            liveLink: '#',
-            codeLink: '#'
+            title: 'Fitness tracking platform',
+            description: 'A complete fitness companion for tracking workouts, monitoring health metrics, and visualizing progress over time.',
+            image: '/src/assets/images/fitness.png',
+            tags: ['React.js', 'Tailwind CSS', 'Flask', 'Rest API', 'Postgresql'],
+            liveLink: 'https://fitflow-frontend-alpha.vercel.app/login',
+            codeLink: 'https://github.com/Austine-john/Fitflow-frontend'
         },
         {
-            title: 'Personal Blog & CMS',
-            description: 'A performant, statically-generated blog with a custom content management system for easy article creation.',
-            image: 'https://images.pexels.com/photos/5744248/pexels-photo-5744248.jpeg?auto=compress&cs=tinysrgb&w=1200',
-            tags: ['Next.js', 'Tailwind CSS', 'GraphQL'],
-            liveLink: '#',
-            codeLink: '#'
+            title: 'Human Resource Management System',
+            description: 'An all-in-one HR solution for managing employee records, attendance, payroll, and recruitment workflows.',
+            image: '/src/assets/images/hrms.png',
+            tags: ['React.js', 'Tailwind CSS', 'Flask', 'Rest API', 'Postgresql'],
+            liveLink: 'https://humanovahrms-front-end-repo.vercel.app',
+            codeLink: 'https://github.com/Ian-N-N/humanovahrms_back_end_repo'
         }
     ];
 
