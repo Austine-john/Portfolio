@@ -6,7 +6,7 @@ const Projects = () => {
         {
             title: 'E-Commerce Platform',
             description: 'A full-featured online store built with a modern frontend and a robust backend for seamless shopping experiences.',
-            image: '/src/assets/images/ecommerce.png',
+            image: '/assets/images/ecommerce.png',
             tags: ['React.js', 'Daraja API', 'Flask', 'sqlite'],
             liveLink: '',
             codeLink: '#'
@@ -14,7 +14,7 @@ const Projects = () => {
         {
             title: 'Fitness tracking platform',
             description: 'A complete fitness companion for tracking workouts, monitoring health metrics, and visualizing progress over time.',
-            image: '/src/assets/images/fitness.png',
+            image: '/assets/images/fitness.png',
             tags: ['React.js', 'Tailwind CSS', 'Flask', 'Rest API', 'Postgresql'],
             liveLink: 'https://fitflow-frontend-alpha.vercel.app/login',
             codeLink: 'https://github.com/Austine-john/Fitflow-frontend'
@@ -22,7 +22,7 @@ const Projects = () => {
         {
             title: 'Human Resource Management System',
             description: 'An all-in-one HR solution for managing employee records, attendance, payroll, and recruitment workflows.',
-            image: '/src/assets/images/hrms.png',
+            image: '/assets/images/hrms.png',
             tags: ['React.js', 'Tailwind CSS', 'Flask', 'Rest API', 'Postgresql'],
             liveLink: 'https://humanovahrms-front-end-repo.vercel.app',
             codeLink: 'https://github.com/Ian-N-N/humanovahrms_back_end_repo'
