@@ -7,7 +7,7 @@ const About = () => {
                 <div className="about-content">
                     <div className="about-image">
                         <div className="about-image-wrapper">
-                            <img src="/assets/images/IMG_5160 (1).jpg" alt="Austine Ochieng" />
+                            <img src="https://res.cloudinary.com/dzp17ssjz/image/upload/v1769431404/IMG_5160_1_jnqxam.jpg" alt="Austine Ochieng" />
                         </div>
                     </div>
                     <div className="about-text">

@@ -22,7 +22,7 @@ const Hero = () => {
                 </div>
                 <div className="hero-image">
                     <div className="image-wrapper">
-                        <img src="/assets/images/IMG_5181.jpg" alt="Austine Ochieng" />
+                        <img src="https://res.cloudinary.com/dzp17ssjz/image/upload/v1769431446/IMG_5181_ac25sb.jpg" alt="Austine Ochieng" />
                     </div>
                 </div>
             </div>
