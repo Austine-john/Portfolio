@@ -80,7 +80,7 @@ const Contact = () => {
                                 <a href="https://github.com/Austine-john" target="_blank" rel="noopener noreferrer" className="social-icon">
                                     <FaGithub />
                                 </a>
-                                <a href="https://twitter.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer" className="social-icon">
+                                <a href="https://x.com/Austine77_" target="_blank" rel="noopener noreferrer" className="social-icon">
                                     <FaTwitter />
                                 </a>
                             </div>
