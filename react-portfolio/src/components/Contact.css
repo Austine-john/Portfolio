@@ -41,6 +41,12 @@
     transform: translateX(10px);
 }
 
+.contact-item a,
+.contact-item p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
 .contact-icon {
     font-size: 2rem;
     color: var(--accent-primary);
@@ -184,6 +190,18 @@
     .contact-content {
         grid-template-columns: 1fr;
         gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-item:hover {
+        transform: none;
+    }
+}
+
+@media (hover: none) {
+    .contact-item:hover {
+        transform: none;
     }
 }
 
