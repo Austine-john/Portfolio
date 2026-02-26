@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import {
     FaJsSquare, FaPython, FaJava, FaReact, FaAngular, FaNodeJs, FaDocker, FaGitAlt, FaDatabase, FaTheaterMasks
 } from 'react-icons/fa';
@@ -5,9 +6,77 @@ import {
     SiTypescript, SiFlask, SiDjango, SiExpress, SiBootstrap, SiTailwindcss,
     SiMongodb, SiPostgresql, SiSupabase, SiKubernetes, SiJenkins, SiSelenium
 } from 'react-icons/si';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Skills.css';
 
+const STAGGER_DELAY_MS = 80;
+
+const SkillCard = ({ skill, index }) => {
+    const barRef = useRef(null);
+
+    useEffect(() => {
+        const bar = barRef.current;
+        if (!bar) return;
+
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        if (prefersReducedMotion) {
+            bar.style.width = `${skill.level}%`;
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        bar.style.width = `${skill.level}%`;
+                    }, index * STAGGER_DELAY_MS);
+                    observer.unobserve(bar);
+                }
+            },
+            { threshold: 0.5 }
+        );
+        observer.observe(bar);
+        return () => observer.unobserve(bar);
+    }, [skill.level, index]);
+
+    return (
+        <div className="skill-card">
+            <div className="skill-icon" aria-hidden="true">{skill.icon}</div>
+            <h4 className="skill-name">{skill.name}</h4>
+            <div
+                className="skill-bar"
+                role="progressbar"
+                aria-label={skill.name}
+                aria-valuenow={skill.level}
+                aria-valuemin="0"
+                aria-valuemax="100"
+            >
+                <div className="skill-progress" ref={barRef} style={{ width: 0 }}></div>
+            </div>
+        </div>
+    );
+};
+
+const SkillsCategory = ({ label, data }) => {
+    const ref = useScrollReveal();
+    return (
+        <div className="skills-category reveal" ref={ref}>
+            <h3 className="category-title">{label}</h3>
+            <div className="skills-grid">
+                {data.map((skill, index) => (
+                    <SkillCard key={skill.name} skill={skill} index={index} />
+                ))}
+            </div>
+        </div>
+    );
+};
+
 const Skills = () => {
+    const headingRef = useScrollReveal();
+
     const skillsData = {
         languages: [
             { name: 'JavaScript', icon: <FaJsSquare />, level: 90 },
@@ -44,70 +113,17 @@ const Skills = () => {
     return (
         <section id="skills" className="skills">
             <div className="container">
-                <h2 className="section-title">My Tech Stack</h2>
-                <p className="section-subtitle">
-                    A showcase of the languages, frameworks, and tools I use to build modern web applications.
-                </p>
-
-                <div className="skills-category">
-                    <h3 className="category-title">Languages</h3>
-                    <div className="skills-grid">
-                        {skillsData.languages.map((skill, index) => (
-                            <div key={index} className="skill-card">
-                                <div className="skill-icon">{skill.icon}</div>
-                                <h4 className="skill-name">{skill.name}</h4>
-                                <div className="skill-bar">
-                                    <div className="skill-progress" style={{ width: `${skill.level}%` }}></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                <div className="reveal" ref={headingRef}>
+                    <h2 className="section-title">My Tech Stack</h2>
+                    <p className="section-subtitle">
+                        A showcase of the languages, frameworks, and tools I use to build modern web applications.
+                    </p>
                 </div>
 
-                <div className="skills-category">
-                    <h3 className="category-title">Frameworks & Libraries</h3>
-                    <div className="skills-grid">
-                        {skillsData.frameworks.map((skill, index) => (
-                            <div key={index} className="skill-card">
-                                <div className="skill-icon">{skill.icon}</div>
-                                <h4 className="skill-name">{skill.name}</h4>
-                                <div className="skill-bar">
-                                    <div className="skill-progress" style={{ width: `${skill.level}%` }}></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="skills-category">
-                    <h3 className="category-title">Databases & Tools</h3>
-                    <div className="skills-grid">
-                        {skillsData.tools.map((skill, index) => (
-                            <div key={index} className="skill-card">
-                                <div className="skill-icon">{skill.icon}</div>
-                                <h4 className="skill-name">{skill.name}</h4>
-                                <div className="skill-bar">
-                                    <div className="skill-progress" style={{ width: `${skill.level}%` }}></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="skills-category">
-                    <h3 className="category-title">QA & Testing</h3>
-                    <div className="skills-grid">
-                        {skillsData.qa.map((skill, index) => (
-                            <div key={index} className="skill-card">
-                                <div className="skill-icon">{skill.icon}</div>
-                                <h4 className="skill-name">{skill.name}</h4>
-                                <div className="skill-bar">
-                                    <div className="skill-progress" style={{ width: `${skill.level}%` }}></div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <SkillsCategory label="Languages" data={skillsData.languages} />
+                <SkillsCategory label="Frameworks & Libraries" data={skillsData.frameworks} />
+                <SkillsCategory label="Databases & Tools" data={skillsData.tools} />
+                <SkillsCategory label="QA & Testing" data={skillsData.qa} />
             </div>
         </section>
     );

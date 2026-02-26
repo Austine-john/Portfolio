@@ -1,7 +1,11 @@
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Projects.css';
 
 const Projects = () => {
+    const headingRef = useScrollReveal();
+    const gridRef = useScrollReveal();
+
     const projects = [
         {
             title: 'E-Commerce Platform',
@@ -34,10 +38,12 @@ const Projects = () => {
     return (
         <section id="projects" className="projects">
             <div className="container">
-                <h2 className="section-title">Projects</h2>
-                <p className="section-subtitle">
-                    A selection of recent projects I've built, from web applications to design systems.
-                </p>
+                <div className="reveal" ref={headingRef}>
+                    <h2 className="section-title">Projects</h2>
+                    <p className="section-subtitle">
+                        A selection of recent projects I&apos;ve built, from web applications to design systems.
+                    </p>
+                </div>
 
                 <div className="project-filters">
                     {filters.map((filter, index) => (
@@ -50,18 +56,20 @@ const Projects = () => {
                     ))}
                 </div>
 
-                <div className="projects-grid">
+                <div className="projects-grid reveal" ref={gridRef}>
                     {projects.map((project, index) => (
                         <div key={index} className="project-card">
                             <div className="project-image">
-                                <img src={project.image} alt={project.title} />
+                                <img src={project.image} alt={project.title} loading="lazy" />
                                 <div className="project-overlay">
                                     <div className="project-links">
-                                        <a href={project.liveLink} className="project-link" target="_blank" rel="noopener noreferrer">
-                                            <FaExternalLinkAlt /> Live Demo
-                                        </a>
+                                        {project.liveLink && (
+                                            <a href={project.liveLink} className="project-link" target="_blank" rel="noopener noreferrer">
+                                                <FaExternalLinkAlt aria-hidden="true" /> Live Demo
+                                            </a>
+                                        )}
                                         <a href={project.codeLink} className="project-link" target="_blank" rel="noopener noreferrer">
-                                            <FaGithub /> View Code
+                                            <FaGithub aria-hidden="true" /> View Code
                                         </a>
                                     </div>
                                 </div>

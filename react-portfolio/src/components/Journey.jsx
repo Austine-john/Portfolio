@@ -1,16 +1,22 @@
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Journey.css';
 import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
 const Journey = () => {
+    const headingRef = useScrollReveal();
+    const containerRef = useScrollReveal();
+
     return (
         <section id="journey" className="journey-section">
             <div className="container">
-                <h2 className="section-title">My Journey</h2>
-                <p className="section-subtitle">
-                    My professional and educational path in software development.
-                </p>
+                <div className="reveal" ref={headingRef}>
+                    <h2 className="section-title">My Journey</h2>
+                    <p className="section-subtitle">
+                        My professional and educational path in software development.
+                    </p>
+                </div>
 
-                <div className="journey-container">
+                <div className="journey-container reveal" ref={containerRef}>
                     <div className="journey-item">
                         <div className="journey-icon"><FaBriefcase /></div>
                         <div className="journey-content">
