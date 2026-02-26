@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Contact.css';
 
 const Contact = () => {
+    const infoRef = useScrollReveal();
+    const formRef = useScrollReveal();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -55,15 +59,15 @@ const Contact = () => {
         <section id="contact" className="contact">
             <div className="container">
                 <div className="contact-content">
-                    <div className="contact-info">
-                        <h2 className="section-title">Let's Connect</h2>
+                    <div className="contact-info reveal reveal-left" ref={infoRef}>
+                        <h2 className="section-title">Let&apos;s Connect</h2>
                         <p className="contact-description">
-                            I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out.
+                            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out.
                         </p>
 
                         <div className="contact-details">
                             <div className="contact-item">
-                                <FaEnvelope className="contact-icon" />
+                                <FaEnvelope className="contact-icon" aria-hidden="true" />
                                 <div>
                                     <h4>Email Me</h4>
                                     <a href="mailto:austineochieng101@gmail.com">austineochieng101@gmail.com</a>
@@ -74,20 +78,20 @@ const Contact = () => {
                         <div className="social-links">
                             <h4>Find me on</h4>
                             <div className="social-icons">
-                                <a href="https://www.linkedin.com/in/austine-john/" target="_blank" rel="noopener noreferrer" className="social-icon">
-                                    <FaLinkedin />
+                                <a href="https://www.linkedin.com/in/austine-john/" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="LinkedIn">
+                                    <FaLinkedin aria-hidden="true" />
                                 </a>
-                                <a href="https://github.com/Austine-john" target="_blank" rel="noopener noreferrer" className="social-icon">
-                                    <FaGithub />
+                                <a href="https://github.com/Austine-john" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="GitHub">
+                                    <FaGithub aria-hidden="true" />
                                 </a>
-                                <a href="https://x.com/Austine77_" target="_blank" rel="noopener noreferrer" className="social-icon">
-                                    <FaTwitter />
+                                <a href="https://x.com/Austine77_" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Twitter / X">
+                                    <FaTwitter aria-hidden="true" />
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <form className="contact-form" onSubmit={handleSubmit}>
+                    <form className="contact-form reveal reveal-right" ref={formRef} onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input
@@ -98,6 +102,7 @@ const Contact = () => {
                                 onChange={handleChange}
                                 placeholder="Enter your name"
                                 required
+                                autoComplete="name"
                             />
                         </div>
 
@@ -111,6 +116,7 @@ const Contact = () => {
                                 onChange={handleChange}
                                 placeholder="Enter your email address"
                                 required
+                                autoComplete="email"
                             />
                         </div>
 
@@ -128,14 +134,14 @@ const Contact = () => {
                         </div>
 
                         <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                            {isSubmitting ? 'Sending...' : 'Send Message'}
+                            {isSubmitting ? 'Sending…' : 'Send Message'}
                         </button>
 
                         {submitStatus === 'success' && (
-                            <p className="status-message success"> Message sent successfully!</p>
+                            <p className="status-message success" role="status">✓ Message sent successfully!</p>
                         )}
                         {submitStatus === 'error' && (
-                            <p className="status-message error"> Failed to send message. Please try again later.</p>
+                            <p className="status-message error" role="alert">✕ Failed to send message. Please try again later.</p>
                         )}
                     </form>
                 </div>

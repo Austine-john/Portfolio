@@ -1,16 +1,20 @@
+import useScrollReveal from '../hooks/useScrollReveal';
 import './About.css';
 
 const About = () => {
+    const imageRef = useScrollReveal();
+    const textRef = useScrollReveal();
+
     return (
         <section id="about" className="about">
             <div className="container">
                 <div className="about-content">
-                    <div className="about-image">
+                    <div className="about-image reveal reveal-left" ref={imageRef}>
                         <div className="about-image-wrapper">
                             <img src="https://res.cloudinary.com/dzp17ssjz/image/upload/v1769431404/IMG_5160_1_jnqxam.jpg" alt="Austine Ochieng" />
                         </div>
                     </div>
-                    <div className="about-text">
+                    <div className="about-text reveal reveal-right" ref={textRef}>
                         <h2 className="section-title">About Me</h2>
                         <p className="about-description">
                             I'm a software engineer building production-ready web systems that are secure, predictable, and easy to maintain. My work focuses on backend application logic, authentication and authorization flows, and data-driven services that support real user workflows end-to-end.
