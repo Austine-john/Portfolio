@@ -59,4 +59,14 @@
     .about-image-wrapper {
         max-width: 300px;
     }
+
+    .about-image-wrapper:hover {
+        transform: none;
+    }
+}
+
+@media (hover: none) {
+    .about-image-wrapper:hover {
+        transform: none;
+    }
 }
