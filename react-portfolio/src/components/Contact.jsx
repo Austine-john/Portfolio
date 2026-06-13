@@ -38,6 +38,8 @@ const Contact = () => {
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
                 {
+                    user_name: formData.name,
+                    user_email: formData.email,
                     name: formData.name,
                     email: formData.email,
                     message: formData.message,
