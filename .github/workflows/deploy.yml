@@ -1,0 +1,69 @@
+name: Deploy portfolio
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: react-portfolio/package-lock.json
+
+      - name: Install dependencies
+        working-directory: react-portfolio
+        run: npm ci
+
+      - name: Lint
+        working-directory: react-portfolio
+        run: npm run lint
+
+      - name: Build
+        working-directory: react-portfolio
+        run: npm run build
+        env:
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${{ secrets.VPS_PORT }}" "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Prepare release directory
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${{ secrets.VPS_PORT }}" \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+            "mkdir -p '${{ secrets.DEPLOY_PATH }}/releases/${{ github.sha }}'"
+
+      - name: Upload build
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.VPS_PORT }}" \
+            react-portfolio/dist/ \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.DEPLOY_PATH }}/releases/${{ github.sha }}/"
+
+      - name: Activate release
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${{ secrets.VPS_PORT }}" \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+            "ln -sfn '${{ secrets.DEPLOY_PATH }}/releases/${{ github.sha }}' '${{ secrets.DEPLOY_PATH }}/current' && find '${{ secrets.DEPLOY_PATH }}/releases' -mindepth 1 -maxdepth 1 -type d | sort -r | tail -n +6 | xargs -r rm -rf"
